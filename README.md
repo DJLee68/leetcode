@@ -1,2 +1,2 @@
 # leetcode
-algorithm in leetcode
+algorithm problems in leetcode
