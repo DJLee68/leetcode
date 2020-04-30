@@ -1,0 +1,28 @@
+/*
+Given an array of integers A sorted in non-decreasing order, return an array of the squares of each number, also in sorted non-decreasing order.
+*/
+
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& A) {
+        vector<int> res(A.size());
+        int idx = A.size() - 1;
+        for(int start = 0, end = A.size()-1; idx>=0; ){
+            
+            int former = pow(A[start], 2);
+            int later = pow(A[end], 2);
+            
+            if(later >= former){
+                res[idx] = later;
+                idx--;
+                end--;
+            }
+            else{
+                res[idx] = former;
+                start++;
+                idx--;
+            }
+        }
+        return res;
+    }
+};
