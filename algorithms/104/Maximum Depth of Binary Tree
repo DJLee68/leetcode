@@ -34,7 +34,7 @@ public:
         int res = 0;
         if(root){
             res++;
-            res =  res + max(root->left? maxDepth(root->left) : 0, root->right? maxDepth(root->right) : 0);
+            res += max(root->left? maxDepth(root->left) : 0, root->right? maxDepth(root->right) : 0);
         }
         else{
             return 0;
