@@ -20,32 +20,40 @@ A linked list can be reversed either iteratively or recursively. Could you imple
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+ 
 class Solution {
 public: 
     ListNode* reverseList(ListNode* head){
+        
+        // Set return node
         ListNode* res = new ListNode;
         
+        // if head is null
         if(!head) return NULL;
+        
+        // if head->next is null(head is last element), return head
         if (head->next == NULL) { 
             res->val = head->val;
             res->next = NULL;
             delete head; 
             return res; 
         }
+        
         // Find the second last node 
         ListNode* second_last = head; 
         while (second_last->next->next != NULL) 
             second_last = second_last->next; 
   
-        // Delete last node 
+        // set last node's value to return node 
         res->val = second_last->next->val;
+        // delete last node
         delete (second_last->next); 
   
         // Change next of second last 
         second_last->next = NULL; 
         
+        // do recursively
         res->next = reverseList(head);
-        return res;
-        
+        return res;  
     }
 };
