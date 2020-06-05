@@ -41,6 +41,7 @@ Can you solve it using O(1) (i.e. constant) memory?
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
@@ -49,11 +50,10 @@ public:
         else{
             ListNode* first = head;
             ListNode* second = head->next;
-            while(second){
+            while(second->next && second->next->next){
                 if(first == second) return true;
                 else{
                     first = first->next;
-                    if(!second->next || !second->next->next) return false;
                     second = second->next->next;
                 }
             }
