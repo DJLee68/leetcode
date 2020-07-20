@@ -12,29 +12,14 @@
 class Solution {
 public:
     bool findTarget(TreeNode* root, int k) {
-        vector<int> vec = tree_to_vec(root);
-        unordered_set<int> iset;
-        for(int i=0; i<vec.size(); i++){
-            if(iset.find(k - vec[i]) != iset.end()){
-                return true;
-            }
-            iset.insert(vec[i]);
-        }
-        return false;
+        unordered_map<int, int> umap;
+        return findVal(root, k, umap);
     }
-    
-    vector<int> tree_to_vec(TreeNode* root){
-        if(!root) return {};
-        vector<int> vec;
-        vec.push_back(root->val);
-        if(root->left){
-            vector<int> left = tree_to_vec(root->left);
-            vec.insert(vec.end(), left.begin(), left.end());
-        }
-        if(root->right){
-            vector<int> right = tree_to_vec(root->right);
-            vec.insert(vec.end(), right.begin(), right.end());
-        }
-        return vec;
+    bool findVal(TreeNode* root, int k, unordered_map<int, int> &umap){
+        if(!root) return false;
+        if(umap.find(k - root->val) != umap.end()) return true;
+        umap[root->val] = true;
+        return findVal(root->left, k, umap) || findVal(root->right, k, umap);
+
     }
 };
