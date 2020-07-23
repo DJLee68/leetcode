@@ -19,6 +19,5 @@ public:
         prev = root->val;
         convertBST(root->left);
         return root;
-
     }
 };
