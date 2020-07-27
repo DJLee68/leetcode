@@ -48,30 +48,19 @@ Accepted
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
 class Solution {
 public:
-    int myFunc(int x, int y){
-        return x-y;
-    }
+    int min_val = INT_MAX;
+    int prev = INT_MAX;
     int minDiffInBST(TreeNode* root) {
-        vector<int> vec = preorder(root);
-        vector<int> tmp;
-        for(int i = 0; i<vec.size()-1; i++){
-            tmp.push_back(vec[i] - vec[i+1]);
-        }
-        int res = *min_element(tmp.begin(), tmp.end());
-        return res;
+        preorder(root);
+        return min_val;
     }
     
-    vector<int> preorder(TreeNode* root){
-        if(!root) return {};
-        vector<int> vec;
-        vector<int> r = preorder(root->right);
-        vec.insert(vec.end(), r.begin(), r.end());
-        vec.push_back(root->val);
-        vector<int> l = preorder(root->left);
-        vec.insert(vec.end(), l.begin(), l.end());
-        
-        return vec;
+    void preorder(TreeNode* root){
+        if(root->right) preorder(root->right);
+        min_val = min(min_val, prev - root->val);
+        prev = root->val;
+        if(root->left) preorder(root->left);
     }
-};
