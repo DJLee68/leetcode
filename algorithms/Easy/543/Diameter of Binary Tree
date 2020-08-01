@@ -41,10 +41,6 @@ public:
             depth += r_depth;
             depth += 1;
         }
-        cout << "l: " << l;
-        cout << "r: " << r; 
-        cout << "depth: " << depth;
-        cout << endl;
         int temp = max(l, r);
         int res = max(temp, depth);
         return res;
