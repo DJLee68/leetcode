@@ -47,10 +47,12 @@ public:
         for(auto n : arr){
             string str = bitset<14>(n).to_string();
             int cnt = count(str.begin(), str.end(), '1');
-            tmp.push_back(make_pair(cnt, n));
+            tmp.push_back(make_pair(n, cnt));
         }
-        sort(tmp.begin(), tmp.end());
-        for(auto n : tmp) res.push_back(n.second);
+        sort(tmp.begin(), tmp.end(),[](auto a, auto b) {
+                return a.second < b.second || (a.second == b.second && a.first < b.first);
+        });
+        for(auto n : tmp) res.push_back(n.first);
         return res;
     }
 };
