@@ -1,0 +1,52 @@
+/*
+Given a m * n matrix mat of integers, sort it diagonally in ascending order from the top-left to the bottom-right then return the sorted array.
+
+ 
+
+Example 1:
+
+
+Input: mat = [[3,3,1,1],[2,2,1,2],[1,1,1,2]]
+Output: [[1,1,1,1],[1,2,2,2],[1,2,3,3]]
+ 
+
+Constraints:
+
+m == mat.length
+n == mat[i].length
+1 <= m, n <= 100
+1 <= mat[i][j] <= 100
+*/
+
+class Solution {
+public:
+    vector<vector<int>> diagonalSort(vector<vector<int>>& mat) {
+        int min_num = min(mat.size(), mat[0].size());
+        
+        // sort horizontal
+        for(int i=0; i<mat[0].size(); i++){
+            vector<int> vec;
+            for(int j=i, c=0; c<min_num && j<mat[0].size(); c++, j++){
+                vec.push_back(mat[c][j]);
+            }
+            sort(vec.begin(), vec.end());
+            for(int j=i, c=0; c<min_num && j<mat[0].size(); c++, j++){
+                mat[c][j] = vec[c];
+            }            
+        }
+        
+        // sort vertical
+        for(int i=1; i<mat.size()-1; i++){
+            vector<int> vec;
+            for(int j=i, c=0; c<min_num && j<mat.size(); c++, j++){
+                vec.push_back(mat[j][c]);
+            }
+            sort(vec.begin(), vec.end());
+            for(int j=i, c=0; c<min_num && j<mat.size(); c++, j++){
+                mat[j][c] = vec[c];
+            }                  
+        }
+        return mat;
+        
+    }
+};
